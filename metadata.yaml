@@ -1,0 +1,7 @@
+name: astrbot_plugin_usage_lens
+display_name: 用量透镜 Usage Lens
+desc: Magpie 可视化用量与账号额度看板，支持缓存命中率、费用趋势、模型明细及聊天查询。
+version: v0.1.1
+author: lrony22
+astrbot_version: ">=4.29.4,<5"
+repo: https://github.com/lrony22/astrbot_plugin_usage_lens

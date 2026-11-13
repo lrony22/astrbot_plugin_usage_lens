@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Magpie 用量看板</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="workspace" data-ui>
+    <header class="page-header">
+      <div class="identity">
+        <svg class="brand-mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 24V8l9 10 9-10v16M7 24l9-6 9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><p class="brand-caption">Magpie · Usage Lens</p><h1>用量与额度</h1></div>
+      </div>
+      <div class="header-actions"><span id="connection" class="connection">正在连接 Magpie</span><button id="refresh" class="button primary" type="button"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 7a6.5 6.5 0 1 0 .2 5M16 3v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>刷新数据</button></div>
+    </header>
+    <div class="view-toolbar">
+      <p class="scope">Magpie 全局<span class="separator">/</span><span id="updated">等待首次读取</span></p>
+      <label class="auto-refresh"><input id="auto" type="checkbox" checked>每分钟自动更新</label>
+    </div>
+    <div id="notice" class="notice" role="status" hidden></div>
+
+    <section class="accounts-section" aria-labelledby="accounts-heading">
+      <div class="section-header"><div><h2 id="accounts-heading">账号额度 <span id="account-count" class="count">—</span></h2><p>每个账号、每个窗口，分别查看剩余额度。</p></div><label class="search"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="account-search" type="search" placeholder="搜索账号或提供商" aria-label="搜索账号或提供商"></label></div>
+      <div id="account-error" class="inline-error" role="status" hidden></div>
+      <div id="accounts" class="account-grid"><div class="empty">正在读取账号额度…</div></div>
+    </section>
+
+    <section class="usage-section" aria-labelledby="usage-heading">
+      <div class="section-header usage-header"><div><h2 id="usage-heading">用量概览</h2><p id="period-label">近 7 天 · 金额为 Magpie 的美元估算</p></div><div class="segmented" role="group" aria-label="统计时段"><button type="button" data-days="1" aria-pressed="false">今天</button><button type="button" data-days="7" aria-pressed="true">近 7 天</button><button type="button" data-days="30" aria-pressed="false">近 30 天</button></div></div>
+      <div id="usage-error" class="inline-error" role="status" hidden></div>
+      <div class="metrics" aria-live="polite">
+        <div class="metric"><span>估算费用 <small>USD</small></span><strong id="cost">—</strong><p id="cost-note">沿用 Magpie 的计费结果</p></div>
+        <div class="metric"><span>调用次数</span><strong id="calls">—</strong><p>所有 Agent 的调用汇总</p></div>
+        <div class="metric"><span>Token 总量 <small>含缓存</small></span><strong id="tokens">—</strong><p id="token-note">输入、缓存读写与输出</p></div>
+        <div class="metric"><span>缓存命中率</span><strong id="cache">—</strong><p id="cache-note">按输入 Token 加权</p></div>
+      </div>
+
+      <div class="analysis-grid">
+        <section class="panel trend-panel" aria-labelledby="trend-heading">
+          <div class="panel-header"><div><h3 id="trend-heading">每日用量</h3><p id="trend-unit">含缓存 Token</p></div><div class="segmented small" role="group" aria-label="趋势指标"><button type="button" data-chart="tokens" aria-pressed="true">Token</button><button type="button" data-chart="cost" aria-pressed="false">费用</button></div></div>
+          <div id="chart" class="chart"><div class="empty">读取趋势中…</div></div>
+          <div id="chart-legend" class="legend"></div>
+          <p class="chart-footnote">今天统计至最近读取时刻。悬停或聚焦柱形可查看每日明细。</p>
+        </section>
+        <section class="panel ranking-panel" aria-labelledby="ranking-heading"><div class="panel-header"><div><h3 id="ranking-heading">费用分布</h3><p>按模型 · USD</p></div><span id="model-count" class="count">—</span></div><div id="ranking" class="ranking"><div class="empty">读取模型明细中…</div></div></section>
+      </div>
+      <section class="panel models-panel" aria-labelledby="models-heading">
+        <div class="panel-header"><div><h3 id="models-heading">模型明细</h3><p>Token 含缓存，费用沿用 Magpie 估算</p></div><label class="search"><input id="model-search" type="search" placeholder="筛选模型或提供商" aria-label="筛选模型或提供商"></label></div>
+        <div class="table-scroll"><table><thead><tr><th scope="col">模型 / 提供商</th><th scope="col">调用</th><th scope="col">Token</th><th scope="col">缓存命中率</th><th scope="col">费用 USD</th></tr></thead><tbody id="models"><tr><td colspan="5" class="empty">正在读取模型明细…</td></tr></tbody></table></div>
+      </section>
+    </section>
+    <footer class="page-footer"><span>Usage Lens · 数据来自 Magpie</span><span>额度重置时间统一使用北京时间</span></footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

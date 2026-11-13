@@ -1,0 +1,8 @@
+{
+  "views": {
+    "overview": {
+      "title": "Magpie Usage",
+      "description": "Account allowances, reset clocks, token usage, caching and cost trends."
+    }
+  }
+}

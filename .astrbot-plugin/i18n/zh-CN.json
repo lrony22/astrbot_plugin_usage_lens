@@ -1,0 +1,8 @@
+{
+  "views": {
+    "overview": {
+      "title": "Magpie 用量看板",
+      "description": "账号剩余额度、重置时间、Token 用量、缓存与费用趋势。"
+    }
+  }
+}

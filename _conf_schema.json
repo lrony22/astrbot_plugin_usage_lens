@@ -1,0 +1,20 @@
+{
+  "magpie_url": {
+    "description": "Magpie 网关根地址",
+    "type": "string",
+    "default": "http://127.0.0.1:3425",
+    "hint": "不带 /v1。Magpie 与 AstrBot 在本机运行时保留默认值；Docker 中须填写可访问 Magpie 的主机地址。"
+  },
+  "magpie_api_key": {
+    "description": "Magpie 网关密钥",
+    "type": "string",
+    "secret": true,
+    "default": "magpie",
+    "hint": "本机默认 magpie。远程连接使用 Magpie 已配置的网关密钥，须允许读取全局用量。"
+  },
+  "timeout_seconds": {
+    "description": "查询超时（秒）",
+    "type": "int",
+    "default": 15
+  }
+}

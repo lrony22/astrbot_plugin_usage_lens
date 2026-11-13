@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+.env
+.env.*
+AGENTS.md
+需求文档.md
+*.log
+*.zip
